@@ -22,10 +22,11 @@ def index():
         username = reg_form.username.data
         password = reg_form.password.data
 
-        #  Check if username already exists
-        user_object = User.query.filter_by(username = username).first()
-        if user_object:
-            return "Someone else has taken this username"
+        #  Added a custom validator for username in wtform_fields.py, therefore no need for this check here
+        # #  Check if username already exists
+        # user_object = User.query.filter_by(username = username).first()
+        # if user_object:
+        #     return "Someone else has taken this username"
 
         #  Add user to DB
         user = User(username = username, password = password)
