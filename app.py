@@ -1,4 +1,6 @@
 from flask import Flask, render_template, redirect, url_for
+from flask_login import LoginManager, login_user, current_user, login_required, logout_user
+
 from wtform_fields import RegistrationForm, LoginForm
 from passlib.hash import pbkdf2_sha256
 
@@ -15,6 +17,16 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 db = SQLAlchemy(app = app)
 
+#  Configure flask login
+login = LoginManager(app = app)
+login.init_app(app = app)
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+
+# noinspection PyArgumentList
 @app.route('/', methods = ['GET', 'POST'])
 def index():
 
@@ -32,7 +44,7 @@ def index():
         #     return "Someone else has taken this username"
 
         #  Add user to DB
-        user = User(username = username, password = hashed_pwd)
+        user = User(username=username, password=hashed_pwd)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('login'))
@@ -47,10 +59,26 @@ def login():
 
     #  Allow login if validation success
     if login_form.validate_on_submit():
-        return "Logged in, finally!"
+        user_object = User.query.filter_by(username = login_form.username.data).first()
+        login_user(user = user_object)
+        return redirect(url_for('chat'))
 
     return render_template('login.html', form = login_form)
 
+
+@app.route("/chat/", methods = ['GET', 'POST'])
+# @login_required
+def chat():
+
+    if not current_user.is_authenticated:
+        return "Please login, to access chat"
+
+
+@app.route("/logout/", methods = ['GET'])
+def logout():
+
+    logout_user()
+    return "Logged out!"
 
 if __name__ == '__main__':
     app.run(debug = True)
