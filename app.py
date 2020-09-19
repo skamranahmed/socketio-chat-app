@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, login_required, logout_user
-from flask_socketio import SocketIO, send
+from flask_socketio import SocketIO, send, emit
 
 from wtform_fields import RegistrationForm, LoginForm
 from passlib.hash import pbkdf2_sha256
@@ -79,11 +79,11 @@ def login():
 # @login_required
 def chat():
 
-    if not current_user.is_authenticated:
-        flash('Please login, before accessing chat', 'danger')
-        return redirect(url_for('login'))
+    # if not current_user.is_authenticated:
+    #     flash('Please login, before accessing chat', 'danger')
+    #     return redirect(url_for('login'))
 
-    return "Chat with me"
+    return render_template('chat.html', username = current_user.username)
 
 
 @app.route("/logout/", methods = ['GET'])
@@ -100,12 +100,15 @@ def logout():
 #  client will send message to this event bucket on the server
 @socketio.on('message')
 def message(data):
-    print("=*40")
-    print(f"{data}")
-    print("=*40")
+    # print("="*40)
+    # print(f"{data}")
+    # print("="*40)
 
     #  send will broadcast the message received by the server, to all the connected clients on the message bucket
     send(data)
+
+    #  this will broadcast the message to an event bucket named custom
+    # emit('custom', 'This is a custom message')
 
 if __name__ == '__main__':
     # app.run(debug = True)

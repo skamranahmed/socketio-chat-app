@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CodeChat</title>
+
+    <!-- Bootstrap -->
+{#    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">#}
+
+</head>
+<body>
+    <!-- Nav bar start -->
+    <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background-color: #66a1ee">
+    </nav>
+    <!-- Nav bar end -->
+
+
+    <div id="main-section">
+        <nav id="sidebar">
+        </nav>
+
+        <div id="rightside-pannel">
+            <div id="display-message-section">
+            </div>
+
+            <div id="input-area" class="input-group mb-3">
+                <input type="text" id="user_message" class="form-control" placeholder="Type here..." aria-label="Type a message" aria-describedby="basic-addon2" autocomplete="off">
+                <div class="input-group-append">
+                    <button id="send_message" class="btn btn-warning" type="button">SEND <i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Get username -->
+    <script type="text/javascript">
+        const username = `{{ username }}`;
+    </script>
+
+    <!-- SocketIO JS -->
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+
+    <!-- Custom SocketIO JS -->
+    <script src="{{ url_for('static', filename='scripts/socketio.js') }}"></script>
+
+</body>
+</html>
