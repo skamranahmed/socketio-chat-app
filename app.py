@@ -1,3 +1,5 @@
+from time import strftime, localtime
+
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, login_required, logout_user
 from flask_socketio import SocketIO, send, emit
@@ -100,12 +102,13 @@ def logout():
 #  client will send message to this event bucket on the server
 @socketio.on('message')
 def message(data):
-    # print("="*40)
-    # print(f"{data}")
-    # print("="*40)
+    print("="*40)
+    print(f"{data}")
+    print("="*40)
 
     #  send will broadcast the message received by the server, to all the connected clients on the message bucket
-    send(data)
+    # send(data)
+    send({'msg': data['msg'], 'username': data['username'], 'time_stamp': strftime('%b-%d %I:%M%p', localtime())})
 
     #  this will broadcast the message to an event bucket named custom
     # emit('custom', 'This is a custom message')
