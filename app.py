@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, login_required, logout_user
+from flask_socketio import SocketIO, send
 
 from wtform_fields import RegistrationForm, LoginForm
 from passlib.hash import pbkdf2_sha256
@@ -16,6 +17,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://vtixpkmljdimhi:8c81a851f7261
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
 db = SQLAlchemy(app = app)
+
+#  Initializing Flask Socket-IO
+socketio = SocketIO(app = app)
 
 #  Configure flask login
 login = LoginManager(app = app)
@@ -93,5 +97,16 @@ def logout():
     flash('Logged out successfully', 'success')
     return redirect(url_for('login'))
 
+#  client will send message to this event bucket on the server
+@socketio.on('message')
+def message(data):
+    print("=*40")
+    print(f"{data}")
+    print("=*40")
+
+    #  send will broadcast the message received by the server, to all the connected clients on the message bucket
+    send(data)
+
 if __name__ == '__main__':
-    app.run(debug = True)
+    # app.run(debug = True)
+    socketio.run(app = app, debug = True)
