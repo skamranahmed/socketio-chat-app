@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for
-
 from wtform_fields import RegistrationForm, LoginForm
+from passlib.hash import pbkdf2_sha256
+
 from models import SQLAlchemy, User
 
 app = Flask(__name__)
@@ -22,6 +23,8 @@ def index():
         username = reg_form.username.data
         password = reg_form.password.data
 
+        hashed_pwd = pbkdf2_sha256.hash(password)
+
         #  Added a custom validator for username in wtform_fields.py, therefore no need for this check here
         # #  Check if username already exists
         # user_object = User.query.filter_by(username = username).first()
@@ -29,7 +32,7 @@ def index():
         #     return "Someone else has taken this username"
 
         #  Add user to DB
-        user = User(username = username, password = password)
+        user = User(username = username, password = hashed_pwd)
         db.session.add(user)
         db.session.commit()
         return redirect(url_for('login'))
