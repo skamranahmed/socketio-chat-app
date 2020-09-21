@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Set default room
     let room = 'Python';
+    joinRoom('Python')
 
     // SocketIO will send message to the server on message bucket, once the client connects with the server
     // socket.on('connect', () => {
@@ -19,10 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
         const span_timestamp = document.createElement('span');
         const br = document.createElement('br');
         // p.innerHTML = data;
-        span_username.innerHTML = data.username;
-        span_timestamp.innerHTML = data.time_stamp;
-        p.innerHTML = span_username.outerHTML + br.outerHTML + data.msg + br.outerHTML + span_timestamp.outerHTML;
-        document.querySelector('#display-message-section').append(p)
+        if (data.username){
+            span_username.innerHTML = data.username;
+            span_timestamp.innerHTML = data.time_stamp;
+            p.innerHTML = span_username.outerHTML + br.outerHTML + data.msg + br.outerHTML + span_timestamp.outerHTML;
+            document.querySelector('#display-message-section').append(p)
+        } else {
+            printSysMsg(data.msg)
+        }
+
         console.log(`Message received: ${data}`);
     });
 
@@ -34,9 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Grabbing the user message from the input box and sending it to the message bucket on server side
     document.querySelector('#send_message').onclick = () => {
         // socket.send(document.querySelector('#user_message').value);
-        socket.send({'msg': document.querySelector('#user_message').value,
-            'username':username, 'room': room});
-
+        socket.send(
+            {
+                'msg': document.querySelector('#user_message').value,
+                'username':username,
+                'room': room
+            }
+        );
+        // Clear the text input field after sending the message
         document.querySelector('#user_message').value = '';
     }
 
@@ -67,6 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Join room
     function joinRoom(newRoom) {
         socket.emit('join', {'username': username, 'newRoom': newRoom})
+        // clear the message section after user joins a new room
+        document.querySelector('#display-message-section').innerHTML = ''
+    }
+    
+    // Print system message
+    function printSysMsg(msg) {
+        const p = document.createElement('p')
+        p.innerHTML = msg
+        document.querySelector('#display-message-section').append(p)
     }
 
 

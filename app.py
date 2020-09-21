@@ -109,7 +109,7 @@ def message(data):
 
     #  send will broadcast the message received by the server, to all the connected clients on the message bucket
     # send(data)
-    send({'msg': data['msg'], 'username': data['username'], 'time_stamp': strftime('%b-%d %I:%M%p', localtime())})
+    send({'msg': data['msg'], 'username': data['username'], 'time_stamp': strftime('%b-%d %I:%M%p', localtime())}, room = data['room'])
 
     #  this will broadcast the message to an event bucket named custom
     # emit('custom', 'This is a custom message')
