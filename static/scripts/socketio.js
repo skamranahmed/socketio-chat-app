@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
     var socket = io.connect(`${location.protocol}//${document.domain}:${location.port}`);
 
+    // Set default room
+    let room = 'Python';
+
     // SocketIO will send message to the server on message bucket, once the client connects with the server
     // socket.on('connect', () => {
         // socket.send('I am connected......')
@@ -31,9 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Grabbing the user message from the input box and sending it to the message bucket on server side
     document.querySelector('#send_message').onclick = () => {
         // socket.send(document.querySelector('#user_message').value);
-
         socket.send({'msg': document.querySelector('#user_message').value,
-            'username':username});
+            'username':username, 'room': room});
 
         document.querySelector('#user_message').value = '';
     }

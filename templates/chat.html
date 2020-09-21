@@ -19,6 +19,11 @@
 
     <div id="main-section">
         <nav id="sidebar">
+            <h4>ROOMS</h4>
+            {% for room in rooms %}
+                <p class="select-room">{{ room|title }}</p>
+            {% endfor %}
+
         </nav>
 
         <div id="rightside-pannel">
