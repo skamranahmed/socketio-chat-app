@@ -39,4 +39,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelector('#user_message').value = '';
     }
+
+    // Room selection
+    document.querySelectorAll('.select-room').forEach(p => {
+        p.onclick = () => {
+            console.log('Clicked')
+            let newRoom = p.innerHTML;
+            console.log(newRoom)
+            if (newRoom === room){
+                msg = `You are already in ${room} room`;
+                console.log(msg)
+                printSysMsg(msg)
+            } else {
+                leaveRoom(room)
+                joinRoom(newRoom)
+                console.log(`You left ${room} room and joined ${newRoom} room`)
+                room = newRoom
+            }
+        }
+    })
+
+    // Leave room
+    function leaveRoom(room) {
+        socket.emit('leave', {'username': username, 'room': room})
+    }
+
+    // Join room
+    function joinRoom(newRoom) {
+        socket.emit('join', {'username': username, 'newRoom': newRoom})
+    }
+
+
+
 })

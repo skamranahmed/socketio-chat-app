@@ -118,13 +118,15 @@ def message(data):
 @socketio.on('join')
 def join(data):
 
-    join_room(data['room'])
-    send({'msg': f"{data['username']} has joined the {data['room']} room"}, room = data['room'])
+    join_room(data['newRoom'])
+    print(f"{data['username']} has now joined {data['newRoom']} room")
+    send({'msg': f"{data['username']} has joined the {data['newRoom']} room"}, room = data['newRoom'])
 
 @socketio.on('leave')
 def leave(data):
 
     leave_room(data['room'])
+    print(f"{data['username']} has now left {data['room']} room")
     send({'msg': f"{data['username']} has left the {data['room']} room"}, room = data['room'])
 
 if __name__ == '__main__':
