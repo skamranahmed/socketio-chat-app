@@ -80,6 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
         socket.emit('join', {'username': username, 'newRoom': newRoom})
         // clear the message section after user joins a new room
         document.querySelector('#display-message-section').innerHTML = ''
+        // Autofocus on text box
+        document.querySelector('#user_message').focus()
     }
     
     // Print system message
