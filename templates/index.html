@@ -14,8 +14,9 @@
         {{ displayField(form.password, 'Password', autocomplete='off') }}
         {{ displayField(form.confirm_pswd, 'Confirm Password', autocomplete='off') }}
 
-        <div>
-            {{ form.submit_button }}
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-warning">
+{#            {{ form.submit_btn }}#}
         </div>
 
         {{ form.csrf_token }}
