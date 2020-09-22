@@ -8,7 +8,7 @@ Functionalities .
 <img src="static/images/chatroom.gif" alt="CodeChat - Chat Rooms" width="40%" height="40%">
 
 ## Files in the program
-- **application.py**: This is the main app file and contains both the registration/login page logic and the Flask-SocketIO backend for the app.
+- **app.py**: This is the main app file and contains both the registration/login page logic and the Flask-SocketIO backend for the app.
 - **models.py**: Contains Flask-SQLAlchemy models used for user registration and login in application.py
 - **wtform_fields.py**: Contains the classes for WTForms/Flask-WTF and the custom validators for the fields
 - **Procfile**: file required for Heroku
