@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %} - CodeChat</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <!-- Custom css for prelogin pages -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/main_style.css') }}">
 </head>
 <body>
     <!-- Flash messages -->

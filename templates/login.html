@@ -6,8 +6,8 @@
 {% endblock %}
 
 {% block content %}
-    <h2>Login Now!</h2>
-    <p>Enter your username/password to start CodeChat</p>
+    <h2>Login</h2>
+    <p>Enter your username and password to start chatting!</p>
 
     <form action="{{ url_for('login') }}" method="POST">
         {{ displayField(form.username, 'Username', autocomplete='off', autofocus=true) }}
@@ -19,5 +19,9 @@
 
         {{ form.csrf_token }}
     </form>
+
+    <hr>
+
+    <p>Have not registered? <a href={{url_for('index')}}>Register here</a>.</p>
 {% endblock %}
 
