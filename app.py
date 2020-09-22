@@ -106,9 +106,6 @@ def logout():
 #  client will send message to this event bucket on the server
 @socketio.on('message')
 def message(data):
-    # print("="*40)
-    print(f"{data}")
-    # print("="*40)
 
     #  send will broadcast the message received by the server, to all the connected clients on the message bucket
     # send(data)
