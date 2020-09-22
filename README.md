@@ -25,6 +25,10 @@ Use [the link to the production server](http://flask-socket-chat.herokuapp.com) 
 
     The two lines to be edited in application.py are shown below:
 ```python
-app.secret_key=os.environ.get('SECRET')
-app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
+app.secret_key = os.environ.get('SECRET')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+```
+2. Clone the repo
+```
+git clone 
 ```
