@@ -13,8 +13,7 @@ app = Flask(__name__)
 app.secret_key = 'this has to be changed later'
 
 #  Configure DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://vtixpkmljdimhi:8c81a851f7261ad1ac0e71a5fa82cecb6b3dd79ef4cf64d59aa9c' \
-                                       '4434c22c17a@ec2-3-218-75-21.compute-1.amazonaws.com:5432/d52cq48f8e1dnq'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://vtixpkmljdimhi:8c81a851f7261ad1ac0e71a5fa82cecb6b3dd79ef4cf64d59aa9c4434c22c17a@ec2-3-218-75-21.compute-1.amazonaws.com:5432/d52cq48f8e1dnq'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
