@@ -13,8 +13,9 @@
         {{ displayField(form.username, 'Username', autocomplete='off', autofocus=true) }}
         {{ displayField(form.password, 'Password', autocomplete='off') }}
 
-        <div>
-            {{ form.login_btn }}
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-warning">
+{#            {{ form.login_btn }}#}
         </div>
 
         {{ form.csrf_token }}
