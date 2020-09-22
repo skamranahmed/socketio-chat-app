@@ -28,10 +28,3 @@ Use [the link to the production server](http://flask-socket-chat.herokuapp.com) 
 app.secret_key=os.environ.get('SECRET')
 app.config['SQLALCHEMY_DATABASE_URI']=os.environ.get('DATABASE_URL')
 ```
-2. Edit *create.py* to once again replace *os.environ.get('DATABASE_URL')* with the link to your database.
-
-3. Run *create.py* from the terminal to create the table to hold user credentials.
-    
-```console
-foo@bar:~$ python create.py
-```
