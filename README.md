@@ -30,5 +30,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 ```
 2. Clone the repo
 ```
-git clone 
+git clone https://github.com/skamranahmed/socketio-chat-app.git
+cd socketio-chat-app
+python3 app.py
 ```
+App will be live on http://127.0.0.1:5000/
