@@ -80,13 +80,17 @@ def login():
 @app.route("/chat/", methods = ['GET', 'POST'])
 # @login_required
 def chat():
-
-    # if not current_user.is_authenticated:
-    #     flash('Please login, before accessing chat', 'danger')
-    #     return redirect(url_for('login'))
+    if not current_user.is_authenticated:
+        flash('Please login before accessing chat', 'danger')
+        return redirect(url_for('login'))
 
     return render_template('chat.html', username = current_user.username, rooms = ROOMS)
 
+
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('404.html'), 404
 
 @app.route("/logout/", methods = ['GET'])
 def logout():
